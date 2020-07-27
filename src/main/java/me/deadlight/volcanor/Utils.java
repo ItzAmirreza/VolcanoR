@@ -4,7 +4,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Entity;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +23,7 @@ public class Utils {
 
 
     public static void sendToConsole(String s) {
-        VolcanoR.getInstance().getServer().getConsoleSender().sendMessage(prefix + s);
+        VolcanoR.getInstance().getServer().getConsoleSender().sendMessage(prefix + color(s));
     }
 
 
@@ -47,14 +49,21 @@ public class Utils {
         List<String> loclist = Arrays.asList(location.split(":"));
         World world = Bukkit.getWorld(loclist.get(0));
         int x = Integer.parseInt(loclist.get(1));
-        int y = Integer.parseInt(loclist.get(1));
-        int z = Integer.parseInt(loclist.get(1));
+        int y = Integer.parseInt(loclist.get(2));
+        int z = Integer.parseInt(loclist.get(3));
         Location finalLoc = new Location(world, x,y,z);
         return finalLoc;
     }
 
     public static int activationDistance = VolcanoR.getInstance().getConfig().getInt("activation-distance");
 
+    public static int BlocksPerWave = VolcanoR.getInstance().getConfig().getInt("blocks-per-wave");
+
+    public static int MobsPerWave = VolcanoR.getInstance().getConfig().getInt("mobs-per-wave");
+
+    public static int eachWaveTime = VolcanoR.getInstance().getConfig().getInt("each-wave-time");
+
+    public static List<Entity> laggyMobs = new ArrayList<>();
 
 
 }

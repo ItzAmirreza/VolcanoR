@@ -1,3 +1,19 @@
 volcano-location: none
 
 activation-distance: 100
+
+blocks-per-wave: 30
+
+mobs-per-wave: 15
+
+antilag-mechanism: true
+
+each-wave-time: 15
+
+specified-mobs:
+  - BLAZE:100
+
+specified-blocks:
+  - STONE:100
+  - DIAMOND_BLOCK:20
+  - GOLD_BLOCK:70

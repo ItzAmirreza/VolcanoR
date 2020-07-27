@@ -4,3 +4,6 @@ main: me.deadlight.volcanor.VolcanoR
 api-version: 1.13
 authors: [Dead_Light]
 description: Well-Designed Volcano plugin for challange
+commands:
+  volcanor:
+    description: main command for Volcanor
