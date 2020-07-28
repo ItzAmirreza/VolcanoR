@@ -2,9 +2,7 @@ package Tasks;
 
 import me.deadlight.volcanor.Utils;
 import me.deadlight.volcanor.VolcanoR;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
@@ -80,6 +78,8 @@ public class VolcanoTask {
                     float y = (float) -5 + (float)(Math.random() * ((5 - -5) + 1));
                     float z = (float) -0.3 + (float)(Math.random() * ((0.3 - -0.3) + 1));
                     block.setVelocity(new Vector(x,y,z));
+                    vLoc.getWorld().playSound(vLoc, Sound.BLOCK_FIRE_EXTINGUISH, 1.0F, 1.0F);
+                    vLoc.getWorld().playEffect(vLoc, Effect.SMOKE, 0);
                     active = true;
                 }
 
