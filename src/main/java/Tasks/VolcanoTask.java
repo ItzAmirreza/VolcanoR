@@ -110,7 +110,6 @@ public class VolcanoTask {
                 if (rPercent <= percentage) {
 
                     Entity entity = vLoc.getWorld().spawnEntity(vLoc, realMob);
-                    Utils.laggyMobs.add(entity);
                     float x = (float) -1 + (float) (Math.random() * ((1 - -1) + 1));
                     float y = (float) -5 + (float)(Math.random() * ((5 - -5) + 1));
                     float z = (float) -0.3 + (float)(Math.random() * ((0.3 - -0.3) + 1));

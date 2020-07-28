@@ -6,19 +6,17 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class AntiLagTask {
 
+    public static Random random = new Random();
 
     public static void antiLagMechanism() {
 
-        List<Entity> listOfMobs = Utils.laggyMobs;
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(VolcanoR.getInstance(), new Runnable() {
             @Override
@@ -26,19 +24,47 @@ public class AntiLagTask {
 
                 if (VolcanoR.getInstance().getConfig().getBoolean("antilag-mechanism") && Utils.isActive()) {
 
-                    int num = 0;
-                    while (num <= Utils.MobsPerWave) {
-                        num++;
-                        try {
-                            Utils.laggyMobs.forEach(mob -> {
-                                mob.remove();
-                                Utils.laggyMobs.remove(mob);
+                    Location loc = Utils.convertStringToLoc(VolcanoR.getInstance().getConfig().getString("volcano-location"));
+                    Collection<Entity> eColl = loc.getWorld().getNearbyEntities(loc, Utils.activationDistance, Utils.activationDistance, Utils.activationDistance);
+                    List<Entity> eList = new ArrayList<>(eColl);
+                    List<String> bList = VolcanoR.getInstance().getConfig().getStringList("specified-mobs");
+                    List<EntityType> mobs = new ArrayList<>();
+                    for (String i : bList) {
 
-                            });
-                        } catch (Exception e) {
+                        mobs.add(EntityType.valueOf(Arrays.asList(i.split(":")).get(0)));
 
+                    }
+
+                    int count = 0;
+
+                    for (Entity entity : eList) {
+
+                        if (mobs.contains(entity.getType())) {
+
+                            count++;
+                        }
+
+                    }
+
+
+                    if (count >= 30) {
+
+                        for (Entity entity : eList) {
+
+                            if (mobs.contains(entity.getType())) {
+
+                                int rPercent = random.nextInt(100) + 1;
+                                if (rPercent >= 30) {
+
+                                    entity.remove();
+
+                                }
+
+
+                            }
 
                         }
+
                     }
 
                 }
@@ -57,7 +83,6 @@ public class AntiLagTask {
 
                     Collection<Entity> eColl = loc.getWorld().getNearbyEntities(loc, Utils.activationDistance, Utils.activationDistance, Utils.activationDistance);
                     List<Entity> eList = new ArrayList<>(eColl);
-                    List<Entity> dropeedItems = new ArrayList<>();
                     List<String> bList = VolcanoR.getInstance().getConfig().getStringList("specified-blocks");
                     List<Material> materials = new ArrayList<>();
                     for (String i : bList) {

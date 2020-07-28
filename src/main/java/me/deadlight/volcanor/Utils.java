@@ -63,7 +63,6 @@ public class Utils {
 
     public static int eachWaveTime = VolcanoR.getInstance().getConfig().getInt("each-wave-time");
 
-    public static List<Entity> laggyMobs = new ArrayList<>();
 
 
 }
