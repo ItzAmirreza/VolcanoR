@@ -10,6 +10,10 @@ antilag-mechanism: true
 
 each-wave-time: 15
 
+warning-message: true
+warning-title: "&c&lBe Careful!"
+warning-subtitle: "&6There is a Volcano near to you!"
+
 specified-mobs:
   - BLAZE:100
 

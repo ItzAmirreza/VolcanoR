@@ -1,5 +1,6 @@
 package me.deadlight.volcanor;
 
+import Tasks.AlertingTask;
 import Tasks.AntiLagTask;
 import Tasks.DistanceTask;
 import Tasks.VolcanoTask;
@@ -25,6 +26,7 @@ public final class VolcanoR extends JavaPlugin {
         DistanceTask.checkForDistance();
         VolcanoTask.StartVolcano();
         AntiLagTask.antiLagMechanism();
+        AlertingTask.AlertAllInRange();
         getServer().getPluginCommand("volcanor").setExecutor(new MainCommand());
         Utils.sendToConsole("&eVolcanoR has been enabled. By Dead_Light");
 

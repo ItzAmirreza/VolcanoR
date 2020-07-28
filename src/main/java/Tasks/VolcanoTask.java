@@ -16,8 +16,8 @@ import java.util.Random;
 
 public class VolcanoTask {
 
-    public static List<String> materials = (VolcanoR.getInstance().getConfig().getStringList("specified-blocks"));
-    public static List<String> mobs = VolcanoR.getInstance().getConfig().getStringList("specified-mobs");
+    public static List<String> materials = Utils.config.getStringList("specified-blocks");
+    public static List<String> mobs = Utils.config.getStringList("specified-mobs");
     public static List<Material> matList = new ArrayList<>();
     public static List<Material> mobList = new ArrayList<>();
     public static Random random = new Random();
@@ -55,7 +55,7 @@ public class VolcanoTask {
 
     public static void launchBlocks() {
 
-        Location vLoc = Utils.convertStringToLoc(VolcanoR.getInstance().getConfig().getString("volcano-location"));
+        Location vLoc = Utils.convertStringToLoc(Utils.config.getString("volcano-location"));
         vLoc.setY(vLoc.getBlockY() + 1);
 
         int num = 0;
@@ -91,7 +91,7 @@ public class VolcanoTask {
 
     public static void spawnMobs() {
 
-        Location vLoc = Utils.convertStringToLoc(VolcanoR.getInstance().getConfig().getString("volcano-location"));
+        Location vLoc = Utils.convertStringToLoc(Utils.config.getString("volcano-location"));
         vLoc.setY(vLoc.getBlockY() + 1);
 
         int num = 0;
@@ -110,9 +110,9 @@ public class VolcanoTask {
                 if (rPercent <= percentage) {
 
                     Entity entity = vLoc.getWorld().spawnEntity(vLoc, realMob);
-                    float x = (float) -1 + (float) (Math.random() * ((1 - -1) + 1));
+                        float x = (float) Math.random() + (float) (Math.random() * ((1 - -1) + 1));
                     float y = (float) -5 + (float)(Math.random() * ((5 - -5) + 1));
-                    float z = (float) -0.3 + (float)(Math.random() * ((0.3 - -0.3) + 1));
+                    float z = (float) Math.random() + (float)(Math.random() * ((0.3 - -0.3) + 1));
                     entity.setVelocity(new Vector(x,y,z));
                     active = true;
                 }

@@ -4,11 +4,17 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 public class Utils {
+
+    public static FileConfiguration config = VolcanoR.getInstance().getConfig();
 
 
     public static String color(String s) {
@@ -52,13 +58,17 @@ public class Utils {
         return finalLoc;
     }
 
-    public static int activationDistance = VolcanoR.getInstance().getConfig().getInt("activation-distance");
+    public static int activationDistance = config.getInt("activation-distance");
 
-    public static int BlocksPerWave = VolcanoR.getInstance().getConfig().getInt("blocks-per-wave");
+    public static int BlocksPerWave = config.getInt("blocks-per-wave");
 
-    public static int MobsPerWave = VolcanoR.getInstance().getConfig().getInt("mobs-per-wave");
+    public static int MobsPerWave = config.getInt("mobs-per-wave");
 
-    public static int eachWaveTime = VolcanoR.getInstance().getConfig().getInt("each-wave-time");
+    public static int eachWaveTime = config.getInt("each-wave-time");
+
+    public static List<Player> playersinrange = new ArrayList<>();
+
+    public static HashMap<Player, Boolean> alerted = new HashMap<>();
 
 
 

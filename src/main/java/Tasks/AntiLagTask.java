@@ -22,12 +22,12 @@ public class AntiLagTask {
             @Override
             public void run() {
 
-                if (VolcanoR.getInstance().getConfig().getBoolean("antilag-mechanism") && Utils.isActive()) {
+                if (Utils.config.getBoolean("antilag-mechanism") && Utils.isActive()) {
 
-                    Location loc = Utils.convertStringToLoc(VolcanoR.getInstance().getConfig().getString("volcano-location"));
+                    Location loc = Utils.convertStringToLoc(Utils.config.getString("volcano-location"));
                     Collection<Entity> eColl = loc.getWorld().getNearbyEntities(loc, Utils.activationDistance, Utils.activationDistance, Utils.activationDistance);
                     List<Entity> eList = new ArrayList<>(eColl);
-                    List<String> bList = VolcanoR.getInstance().getConfig().getStringList("specified-mobs");
+                    List<String> bList = Utils.config.getStringList("specified-mobs");
                     List<EntityType> mobs = new ArrayList<>();
                     for (String i : bList) {
 
@@ -77,13 +77,13 @@ public class AntiLagTask {
             @Override
             public void run() {
 
-                if (VolcanoR.getInstance().getConfig().getBoolean("antilag-mechanism") && Utils.isActive()) {
+                if (Utils.config.getBoolean("antilag-mechanism") && Utils.isActive()) {
 
-                    Location loc = Utils.convertStringToLoc(VolcanoR.getInstance().getConfig().getString("volcano-location"));
+                    Location loc = Utils.convertStringToLoc(Utils.config.getString("volcano-location"));
 
                     Collection<Entity> eColl = loc.getWorld().getNearbyEntities(loc, Utils.activationDistance, Utils.activationDistance, Utils.activationDistance);
                     List<Entity> eList = new ArrayList<>(eColl);
-                    List<String> bList = VolcanoR.getInstance().getConfig().getStringList("specified-blocks");
+                    List<String> bList = Utils.config.getStringList("specified-blocks");
                     List<Material> materials = new ArrayList<>();
                     for (String i : bList) {
 

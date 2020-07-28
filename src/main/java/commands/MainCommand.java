@@ -1,5 +1,6 @@
 package commands;
 
+import me.deadlight.volcanor.ConfigManager;
 import me.deadlight.volcanor.Utils;
 import me.deadlight.volcanor.VolcanoR;
 import org.bukkit.Material;
@@ -8,6 +9,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import sun.security.krb5.Config;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,12 +30,12 @@ public class MainCommand implements CommandExecutor {
 
                 if (args[0].equalsIgnoreCase("help")) {
 
-                    player.sendMessage(Utils.prefix + Utils.color("Help page: \n &7- /volcanor setlocation - Set the location of volcano \n &7- /volcanor addmob/removemob mob percentage - Adding/Removing a mob \n &7- /volcanor addblock/removeblock block percentage - Adding/Removing a block"));
+                    player.sendMessage(Utils.prefix + Utils.color("Help page: \n &7- /volcanor setlocation - Set the location of volcano \n &7- /volcanor addmob/removemob mob percentage - Adding/Removing a mob \n &7- /volcanor addblock/removeblock block percentage - Adding/Removing a block \n &7- /volcanor reload - reload the config"));
 
                 } else if (args[0].equalsIgnoreCase("setlocation")) {
 
-                    VolcanoR.getInstance().getConfig().set("volcano-location", Utils.convertLocToString(player.getLocation()));
-                    VolcanoR.getInstance().saveConfig();
+                    Utils.config.set("volcano-location", Utils.convertLocToString(player.getLocation()));
+                    ConfigManager.reloadTheConfig();
                     player.sendMessage(Utils.prefix + Utils.color("&cLocation successfully set."));
                 } else if (args[0].equalsIgnoreCase("addmob")) {
 
@@ -43,16 +45,16 @@ public class MainCommand implements CommandExecutor {
 
                             EntityType.valueOf(args[1]);
                             int num = Integer.parseInt(args[2]);
-                            if ((1 <= num && num >= 100)) {
+                            if ((1 <= num && num <= 100)) {
 
-                                if (VolcanoR.getInstance().getConfig().getStringList("specified-mobs").contains(args[1])) {
+                                if (Utils.config.getStringList("specified-mobs").contains(args[1])) {
                                     player.sendMessage(Utils.prefix + Utils.color("&cThis item already exists."));
                                 } else {
 
-                                    List<String> list = VolcanoR.getInstance().getConfig().getStringList("specified-mobs");
+                                    List<String> list = Utils.config.getStringList("specified-mobs");
                                     list.add(args[1] + ":" + args[2]);
-                                    VolcanoR.getInstance().getConfig().set("specified-mobs", list);
-                                    VolcanoR.getInstance().saveConfig();
+                                    Utils.config.set("specified-mobs", list);
+                                    ConfigManager.reloadTheConfig();
                                     player.sendMessage(Utils.prefix + Utils.color("&aItem successfully added to the list."));
                                 }
                             } else {
@@ -69,7 +71,7 @@ public class MainCommand implements CommandExecutor {
 
                     } else {
 
-                        player.sendMessage(Utils.prefix + "&cYou missed an argument for sure!");
+                        player.sendMessage(Utils.prefix + Utils.color("&cYou missed an argument for sure!"));
 
                     }
 
@@ -81,16 +83,16 @@ public class MainCommand implements CommandExecutor {
 
                             Material matt = Material.matchMaterial(args[1]);
                             int num = Integer.parseInt(args[2]);
-                            if ((1 <= num && num >= 100) || matt != null) {
+                            if ((1 <= num && num <= 100) || matt != null) {
 
-                                if (VolcanoR.getInstance().getConfig().getStringList("specified-blocks").contains(args[1])) {
+                                if (Utils.config.getStringList("specified-blocks").contains(args[1])) {
                                     player.sendMessage(Utils.prefix + Utils.color("&cThis item already exists."));
                                 } else {
 
-                                    List<String> list = VolcanoR.getInstance().getConfig().getStringList("specified-blocks");
+                                    List<String> list = Utils.config.getStringList("specified-blocks");
                                     list.add(args[1] + ":" + args[2]);
-                                    VolcanoR.getInstance().getConfig().set("specified-blocks", list);
-                                    VolcanoR.getInstance().saveConfig();
+                                    Utils.config.set("specified-blocks", list);
+                                    ConfigManager.reloadTheConfig();
                                     player.sendMessage(Utils.prefix + Utils.color("&aItem successfully added to the list."));
                                 }
                             } else {
@@ -107,7 +109,7 @@ public class MainCommand implements CommandExecutor {
 
                     } else {
 
-                        player.sendMessage(Utils.prefix + "&cYou missed an argument for sure!");
+                        player.sendMessage(Utils.prefix + Utils.color("&cYou missed an argument for sure!"));
 
                     }
 
@@ -119,7 +121,7 @@ public class MainCommand implements CommandExecutor {
                         Material matt = Material.matchMaterial(args[1]);
                         if (matt != null) {
 
-                            List<String> list = VolcanoR.getInstance().getConfig().getStringList("specified-blocks");
+                            List<String> list = Utils.config.getStringList("specified-blocks");
                             String found = null;
                             for (String i : list) {
 
@@ -132,8 +134,8 @@ public class MainCommand implements CommandExecutor {
 
                                 list.remove(found);
 
-                                VolcanoR.getInstance().getConfig().set("specified-blocks", list);
-                                VolcanoR.getInstance().saveConfig();
+                                Utils.config.set("specified-blocks", list);
+                                ConfigManager.reloadTheConfig();
                                 player.sendMessage(Utils.prefix + Utils.color("&aItem successfully removed from the list."));
 
                             } else {
@@ -151,7 +153,7 @@ public class MainCommand implements CommandExecutor {
 
                     } else {
 
-                        player.sendMessage(Utils.prefix + "&cYou missed an argument for sure!");
+                        player.sendMessage(Utils.prefix + Utils.color("&cYou missed an argument for sure!"));
 
                     }
 
@@ -163,7 +165,7 @@ public class MainCommand implements CommandExecutor {
                         try {
 
                             EntityType mob = EntityType.valueOf(args[1]);
-                            List<String> list = VolcanoR.getInstance().getConfig().getStringList("specified-mobs");
+                            List<String> list = Utils.config.getStringList("specified-mobs");
                             String found = null;
                             for (String i : list) {
 
@@ -176,8 +178,8 @@ public class MainCommand implements CommandExecutor {
 
                                 list.remove(found);
 
-                                VolcanoR.getInstance().getConfig().set("specified-mobs", list);
-                                VolcanoR.getInstance().saveConfig();
+                                Utils.config.set("specified-mobs", list);
+                                ConfigManager.reloadTheConfig();
                                 player.sendMessage(Utils.prefix + Utils.color("&aItem successfully removed from the list."));
 
                             } else {
@@ -195,10 +197,18 @@ public class MainCommand implements CommandExecutor {
 
                     } else {
 
-                        player.sendMessage(Utils.prefix + "&cYou missed an argument for sure!");
+                        player.sendMessage(Utils.prefix + Utils.color("&cYou missed an argument for sure!"));
 
                     }
 
+                } else if (args[0].equalsIgnoreCase("reload")) {
+
+                    ConfigManager.reloadCommand();
+                    player.sendMessage(Utils.prefix + Utils.color("&aConfig has been reloaded!"));
+
+                } else {
+
+                    player.sendMessage(Utils.prefix + Utils.color("&cDo you want help? /volcanor help"));
                 }
             }  else {
 
