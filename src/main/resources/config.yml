@@ -8,7 +8,7 @@ mobs-per-wave: 15
 
 antilag-mechanism: true
 
-each-wave-time: 15
+each-wave-time: 10
 
 warning-message: true
 warning-title: "&c&lBe Careful!"

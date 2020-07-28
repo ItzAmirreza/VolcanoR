@@ -18,8 +18,7 @@ public class VolcanoTask {
 
     public static List<String> materials = Utils.config.getStringList("specified-blocks");
     public static List<String> mobs = Utils.config.getStringList("specified-mobs");
-    public static List<Material> matList = new ArrayList<>();
-    public static List<Material> mobList = new ArrayList<>();
+    public static int eachWaveTime = Utils.eachWaveTime;
     public static Random random = new Random();
 
     public static void StartVolcano() {
@@ -49,7 +48,7 @@ public class VolcanoTask {
                 }
             }
             //I guess 3 seconds for each launch is good...
-        }, 20, 20 * 10);
+        }, 20, 20 * eachWaveTime);
 
     }
 

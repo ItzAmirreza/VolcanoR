@@ -23,6 +23,7 @@ public class ConfigManager {
         AlertingTask.alerting = Utils.config.getBoolean("warning-message");
         AlertingTask.alertTitle = Utils.config.getString("warning-title");
         AlertingTask.alertSubtitle = Utils.config.getString("warning-subtitle");
+        VolcanoTask.eachWaveTime = Utils.config.getInt("each-wave-time");
 
     }
 
